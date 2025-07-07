@@ -10,7 +10,8 @@ class CarrierWave::Uploader::Base
   add_config :public_access_level
   add_config :auto_sign_urls
   add_config :token_expire_after
-
+  add_config :reverse_proxy_host
+  
   configure do |config|
     config.public_access_level = 'blob'
     config.token_expire_after = 1800

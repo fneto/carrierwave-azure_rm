@@ -29,7 +29,7 @@ CarrierWave.configure do |config|
   config.azure_storage_blob_host = 'YOUR STORAGE BLOB HOST' # optional
   config.azure_container = 'YOUR CONTAINER NAME'
   config.asset_host = 'YOUR CDN HOST' # optional
-  config.reverse_proxy_host = 'YOUR REVERSE PROXY HOST HOST' # optional, this will change the domain but keep the signed params for private blobs
+  config.reverse_proxy_host = 'YOUR REVERSE PROXY HOST' # optional, this will change the domain but keep the signed params for private blobs
 end
 ```
 
