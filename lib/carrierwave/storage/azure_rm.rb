@@ -1,4 +1,5 @@
 require 'azure/storage'
+require 'uri'
 
 module CarrierWave
   module Storage
@@ -79,10 +80,17 @@ module CarrierWave
           else
             uri = @connection.generate_uri(path)
             if sign_url?(options)
-              @signer.signed_uri(uri, false, { permissions: 'r',
+              signed_uri = @signer.signed_uri(uri, false, { permissions: 'r',
                                                resource: 'b',
                                                start: 1.minute.ago.utc.iso8601,
                                                expiry: expires_at}).to_s
+              if @uploader.reverse_proxy_host
+                signed_uri = URI.parse(url)
+                signed_uri.host = @uploader.reverse_proxy_host
+                return signed_uri.to_s
+              else
+                return signed_uri
+              end
             else
               uri.to_s
             end
