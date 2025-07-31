@@ -85,7 +85,7 @@ module CarrierWave
                                                start: 1.minute.ago.utc.iso8601,
                                                expiry: expires_at}).to_s
               if @uploader.reverse_proxy_host
-                signed_uri = URI.parse(signed_uri)
+                signed_uri = URI.parse(URI.escape(signed_uri))
                 signed_uri.host = @uploader.reverse_proxy_host
                 return signed_uri.to_s
               else
