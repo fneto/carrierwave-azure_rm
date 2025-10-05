@@ -74,11 +74,11 @@ module CarrierWave
         end
 
         def url(options = {})
-          path = ::File.join @uploader.azure_container, URI.escape(@path)
+          path = ::File.join @uploader.azure_container, @path
           if @uploader.asset_host
             "#{@uploader.asset_host}/#{path}"
           else
-            uri = @connection.generate_uri(path)
+            uri = @connection.generate_uri(path, {}, true)
             if sign_url?(options)
               signed_uri = @signer.signed_uri(uri, false, { permissions: 'r',
                                                resource: 'b',
